@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var expressValidator = require('express-validator');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -21,6 +22,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(expressValidator());
+
+/* MySql connection */
+var connection  = require('express-myconnection'),
+    mysql = require('mysql');
+
+app.use(
+    connection(mysql,{
+        host     : 'localhost',
+        user     : 'root',
+        password : '',
+        database : 'shareout',
+        debug    : true //set true if you wanna see debug logger
+    }, 'request')
+);
 
 app.use('/', routes);
 app.use('/users', users);
