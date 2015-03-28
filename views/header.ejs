@@ -2,6 +2,19 @@
 <html>
   <head>
     <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/normalize.css' />
+    <link rel='stylesheet' href='/stylesheets/helpers.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <div class="container">
+      <nav class="main-menu">
+        <ul class="nav pull-left">
+          <li class="active"><a href="/">Home</a></li>
+        </ul>
+        <ul class="auth-nav nav pull-right">
+          <li class="auth-nav-sign-in"><a href="#">Sign In</a></li>
+          <li class="auth-nav-sign-out"><a href="#">Sign Out</a></li>
+        </ul>
+        <div class="clearfix"></div>
+      </nav>
