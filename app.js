@@ -34,9 +34,35 @@ app.use(
         user     : 'root',
         password : '',
         database : 'shareout',
-        debug    : true //set true if you wanna see debug logger
+        debug    : false //set true if you wanna see debug logger
     }, 'request')
 );
+
+// LOAD SIGNED IN USER
+app.use(function(req, res, next){
+
+      req.getConnection(function(err, connection) {
+        if (err) return next(err);
+        connection.query(
+            'SELECT * FROM users WHERE id = ?',
+            [req.cookies.user_id],
+            function(err, results) {
+
+          if (err) return next(err);
+
+          if (results.length > 0){
+            res.locals.current_user = results[0]
+            req.current_user = results[0]
+          } else {
+            res.locals.current_user = null
+            req.current_user = null
+          }
+
+          next();
+        });
+      });
+
+})
 
 app.use('/', routes);
 app.use('/users', users);
@@ -71,6 +97,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;
