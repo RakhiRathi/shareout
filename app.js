@@ -11,6 +11,9 @@ var users = require('./routes/users');
 
 var app = express();
 
+// load .env
+require('dotenv').load();
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -28,15 +31,8 @@ app.use(expressValidator());
 var connection  = require('express-myconnection'),
     mysql = require('mysql');
 
-app.use(
-    connection(mysql,{
-        host     : 'localhost',
-        user     : 'root',
-        password : '',
-        database : 'shareout',
-        debug    : false //set true if you wanna see debug logger
-    }, 'request')
-);
+var db_url = process.env.DATABASE_URL || process.env.CLEARDB_DATABASE_URL
+app.use(connection(mysql, db_url, 'request'));
 
 // LOAD SIGNED IN USER
 app.use(function(req, res, next){
