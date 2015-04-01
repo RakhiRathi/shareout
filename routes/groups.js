@@ -7,7 +7,7 @@ var models  = require('../models');
 
 /* GET list of groups. */
 router.get('/', function(req, res, next) {
-  req.current_user.getGroups().then(function(groups){
+  models.Group.findAll({ UserId: req.current_user.id }).then(function(groups){
     res.render('groups/index', {
       title: 'Groups - ShareOut',
       groups: groups
@@ -42,7 +42,8 @@ router.get('/new', function(req, res, next) {
 router.post('/create', function(req, res, next) {
   var group = models.Group.build({
     name: req.body.name,
-    description: req.body.description
+    description: req.body.description,
+    UserId: req.current_user.id
   })
 
   group.save().then(function(){
@@ -62,6 +63,16 @@ router.post('/create', function(req, res, next) {
       group: group,
       alert_error: alert_error
     });
+  })
+});
+
+/* GET delete the group. */
+router.get('/destroy/:id', function(req, res, next) {
+  models.Group.find({ where: { id: req.params.id } }).then(function(group) {
+    group.destroy().then(function(){
+      req.session.alert_success = "Group was removed."
+      res.redirect('/groups')
+    })
   })
 });
 
