@@ -8,15 +8,15 @@
 
 <table class="table">
   <tr>
-    <th>Name</th>
     <th>Date</th>
+    <th>Name</th>
     <th>Description</th>
     <th></th>
   </tr>
   <% for (var i in groups) { %>
     <tr>
-      <td><a href="/groups/show/<%= groups[i].id %>"><%= groups[i].name %></a></td>
       <td><%= helper.moment(groups[i].createdAt).format('MMMM Do YYYY') %></td>
+      <td><a href="/groups/show/<%= groups[i].id %>"><%= groups[i].name %></a></td>
       <td><%= groups[i].description %></td>
       <td><a href="/groups/destroy/<%= groups[i].id %>" data-confirm="Sure?">Delete</a></td>
     </tr>

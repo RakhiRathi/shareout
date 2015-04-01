@@ -8,4 +8,42 @@
 
 <p><%= group.description %></p>
 
+<h2>Activities</h2>
+
+<button class="btn" data-toggle="modal" data-target="#addActivityModal">
+  Add Activity
+</button>
+
+<br><br>
+
+<table class="table">
+  <tr>
+    <th>Date</th>
+    <th>Name</th>
+    <th>Cost</th>
+  </tr>
+</table>
+
+<div class="modal" id="addActivityModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Activity</h4>
+      </div>
+      <div class="modal-body">
+          <label for="user_name">Name</label>
+          <input id="user_name" type="text" name="name">
+          <br>
+          <label for="user_description">Description</label>
+          <textarea id="user_description" name="description"></textarea>
+          <br>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal">Close</button>
+        <button class="btn">Add Activity</button>
+      </div>
+    </div> <!-- .modal-content -->
+  </div> <!-- .modal-dialog -->
+</div>
+
 <% include ../footer %>
