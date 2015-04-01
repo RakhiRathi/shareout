@@ -13,8 +13,5 @@ CREATE TABLE `users` (
 
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
-(1, 'Mas Banyar', 'banyar@yahoo.com', '23235645yghgf'),
-(2, 'Mas Mapmup', 'mapmup@gmail.com', 'dncskdcndscsdcdsc'),
-(3, 'zhomart', 'zhomart@shareout.pw', 'asdasdasd'),
-(4, 'Boronong', 'borononn@yahoo.com', '032bcsjdncsdjc3223'),
+(3, 'zhomart', 'zhomart@shareout.pw', md5('asdasdasd')),
 (5, 'Nadya Ek', 'nadya@yahoo.com', 'bonbon032932');

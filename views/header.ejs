@@ -25,3 +25,11 @@
           <% } %>
         <div class="clearfix"></div>
       </nav>
+
+      <% if (alert_error) { %>
+        <p class="alert alert-error"><%= alert_error %></p>
+      <% } %>
+
+      <% if (alert_success) { %>
+        <p class="alert alert-success"><%= alert_success %></p>
+      <% } %>

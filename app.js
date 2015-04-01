@@ -60,6 +60,17 @@ app.use(function(req, res, next){
 
 })
 
+// INITIALIZE VIEW VARIABLES
+app.use(function(req, res, next){
+  res.locals.alert_error = req.cookies.alert_error
+  res.clearCookie('alert_error')
+
+  res.locals.alert_success = req.cookies.alert_success
+  res.clearCookie('alert_success')
+
+  next();
+})
+
 app.use('/', routes);
 app.use('/users', users);
 
