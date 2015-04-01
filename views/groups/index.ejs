@@ -8,10 +8,15 @@
 
 <table class="table">
   <tr>
-    <th>Id</th>
     <th>Name</th>
     <th>Description</th>
   </tr>
+  <% for (var i in groups) { %>
+    <tr>
+      <td><a href="/groups/show/<%= groups[i].id %>"><%= groups[i].name %></a></td>
+      <td><%= groups[i].description %></td>
+    </tr>
+  <% } %>
 </table>
 
 <% include ../footer %>

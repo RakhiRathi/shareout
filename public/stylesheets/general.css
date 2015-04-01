@@ -1,0 +1,118 @@
+/* ============== body ================= */
+
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #D1D1D1;
+}
+
+/* ============== links ================= */
+
+a {
+  color: #337ab7;
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  color: #23527c;
+  text-decoration: underline;
+}
+a:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+/* ============== container ================= */
+
+.container {
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+
+  background-color: #FFFFFF;
+  padding: 30px 30px;
+
+}
+
+/* ============== nav ================= */
+
+
+.nav {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  border-bottom: 1px solid #ddd;
+}
+
+.nav > li {
+  position: relative;
+  display: block;
+  float: left;
+  margin-bottom: -1px;
+}
+
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+  text-decoration: none;
+}
+
+.nav > li > a:hover {
+  border-color: #eee #eee #ddd;
+  text-decoration: none;
+  background-color: #eee;
+}
+
+/* ============== alert ================= */
+
+.alert {
+
+}
+
+.alert-error {
+  color: red;
+}
+
+.alert-success {
+  color: green;
+}
+
+/* ============== table ================= */
+
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+.table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
+}
+.table > caption + thead > tr:first-child > th,
+.table > colgroup + thead > tr:first-child > th,
+.table > thead:first-child > tr:first-child > th,
+.table > caption + thead > tr:first-child > td,
+.table > colgroup + thead > tr:first-child > td,
+.table > thead:first-child > tr:first-child > td {
+  border-top: 0;
+}
+.table > tbody + tbody {
+  border-top: 2px solid #ddd;
+}
