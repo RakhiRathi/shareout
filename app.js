@@ -8,8 +8,15 @@ var expressValidator = require('express-validator');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var activities = require('./routes/activities');
+
+var middleware_current_user = require('./config/middlewares/current_user')
+var middleware_alert = require('./config/middlewares/alert')
 
 var app = express();
+
+var session = require('express-session')
+var FileStore = require('session-file-store')(session);
 
 // load .env
 require('dotenv').load();
@@ -27,52 +34,48 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressValidator());
 
-/* MySql connection */
-var connection  = require('express-myconnection'),
-    mysql = require('mysql');
+app.use(session({
+  resave: true,
+  saveUninitialized: false,
+  secret: 'share_out_GJSDAFJIASDFASIDJ12349871zSADFASDF12398905',
+  cookie: { maxAge: 6*60*60000 }, // 6 hours
+  store: new FileStore({
+    reapInterval: 3*60*60 // in seconds, 3 hours
+  })
+}))
 
-var db_url = process.env.DATABASE_URL || process.env.CLEARDB_DATABASE_URL
-app.use(connection(mysql, db_url, 'request'));
+app.use(middleware_current_user)
+// // LOAD SIGNED IN USER
+// app.use(function(req, res, next){
 
-// LOAD SIGNED IN USER
-app.use(function(req, res, next){
+//       req.getConnection(function(err, connection) {
+//         if (err) return next(err);
+//         connection.query(
+//             'SELECT * FROM users WHERE id = ?',
+//             [req.cookies.user_id],
+//             function(err, results) {
 
-      req.getConnection(function(err, connection) {
-        if (err) return next(err);
-        connection.query(
-            'SELECT * FROM users WHERE id = ?',
-            [req.cookies.user_id],
-            function(err, results) {
+//           if (err) return next(err);
 
-          if (err) return next(err);
+//           if (results.length > 0){
+//             res.locals.current_user = results[0]
+//             req.current_user = results[0]
+//           } else {
+//             res.locals.current_user = null
+//             req.current_user = null
+//           }
 
-          if (results.length > 0){
-            res.locals.current_user = results[0]
-            req.current_user = results[0]
-          } else {
-            res.locals.current_user = null
-            req.current_user = null
-          }
+//           next();
+//         });
+//       });
 
-          next();
-        });
-      });
+// })
 
-})
-
-// INITIALIZE VIEW VARIABLES
-app.use(function(req, res, next){
-  res.locals.alert_error = req.cookies.alert_error
-  res.clearCookie('alert_error')
-
-  res.locals.alert_success = req.cookies.alert_success
-  res.clearCookie('alert_success')
-
-  next();
-})
+app.use(middleware_alert)
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/activities', activities);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

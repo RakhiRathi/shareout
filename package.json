@@ -16,6 +16,10 @@
     "express-myconnection": "*",
     "express-validator": "^2.6.0",
     "mysql": "~2.6.1",
-    "dotenv": "*"
+    "dotenv": "*",
+    "sequelize": "~2.0.5",
+    "sequelize-cli": "*",
+    "express-session": "*",
+    "session-file-store": "*"
   }
 }
