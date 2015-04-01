@@ -10,6 +10,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var groups = require('./routes/groups');
 
+var middleware_helper = require('./config/middlewares/helper')
 var middleware_current_user = require('./config/middlewares/current_user')
 var middleware_alert = require('./config/middlewares/alert')
 
@@ -44,33 +45,8 @@ app.use(session({
   })
 }))
 
+app.use(middleware_helper)
 app.use(middleware_current_user)
-// // LOAD SIGNED IN USER
-// app.use(function(req, res, next){
-
-//       req.getConnection(function(err, connection) {
-//         if (err) return next(err);
-//         connection.query(
-//             'SELECT * FROM users WHERE id = ?',
-//             [req.cookies.user_id],
-//             function(err, results) {
-
-//           if (err) return next(err);
-
-//           if (results.length > 0){
-//             res.locals.current_user = results[0]
-//             req.current_user = results[0]
-//           } else {
-//             res.locals.current_user = null
-//             req.current_user = null
-//           }
-
-//           next();
-//         });
-//       });
-
-// })
-
 app.use(middleware_alert)
 
 app.use('/', routes);
