@@ -8,7 +8,7 @@ var expressValidator = require('express-validator');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var activities = require('./routes/activities');
+var groups = require('./routes/groups');
 
 var middleware_current_user = require('./config/middlewares/current_user')
 var middleware_alert = require('./config/middlewares/alert')
@@ -75,7 +75,7 @@ app.use(middleware_alert)
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/activities', activities);
+app.use('/groups', groups);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,18 @@
+<% include ../header %>
+
+<h1>New Group</h1>
+
+<a href="/groups">Back</a>
+
+<form action="/groups/create" method="POST">
+  <label for="user_name">Name</label>
+  <input id="user_name" type="text" name="name" value="<%= group.name %>">
+  <br>
+  <label for="user_description">Description</label>
+  <textarea id="user_description" name="description"><%= group.description %></textarea>
+  <br>
+  <button>Create Group</button>
+</form>
+
+
+<% include ../footer %>

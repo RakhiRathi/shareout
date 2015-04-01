@@ -15,9 +15,10 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     classMethods: {
-      // associate: function(models) {
-      //   User.hasMany(models.Task)
-      // }
+      associate: function(models) {
+        User.hasMany(models.Group)
+        User.belongsToMany(models.Group, {through: 'UserShare'});
+      }
     }
   });
 

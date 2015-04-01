@@ -21,5 +21,8 @@
     "sequelize-cli": "*",
     "express-session": "*",
     "session-file-store": "*"
+  },
+  "devDependencies": {
+    "locus": "*"
   }
 }
