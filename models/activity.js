@@ -2,8 +2,8 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Activity = sequelize.define("Activity", {
-    title: DataTypes.STRING,
-    price: DataTypes.FLOAT
+    title: { type: DataTypes.STRING, allowNull: false, validate: { notEmpty: true } },
+    cost: { type: DataTypes.FLOAT, allowNull: false, validate: { isFloat: true, min: 0.1 } }
   }, {
     classMethods: {
       associate: function(models) {

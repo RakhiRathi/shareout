@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Group = sequelize.define("Group", {
-    name: { type: DataTypes.STRING, notNull: true },
+    name: { type: DataTypes.STRING, allowNull: false, validate: { notEmpty: true } },
     description: DataTypes.TEXT
   }, {
     classMethods: {

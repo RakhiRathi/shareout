@@ -1,12 +1,14 @@
 <% include ../header %>
 
-<h1>Group <%= group.name %></h1>
+<h1><%= group.name %></h1>
 
 <a href="/groups">Back</a>
 
 <hr>
 
-<p><%= group.description %></p>
+<p><i><%= group.description %></i></p>
+
+<p><b>Created at: </b><%= helper.moment(group.createdAt).format('MMMM Do YYYY') %></p>
 
 <h2>Activities</h2>
 
@@ -16,13 +18,25 @@
 
 <br><br>
 
+Number of activities: <%= activities.length %>
+
 <table class="table">
   <tr>
     <th>Date</th>
-    <th>Name</th>
+    <th>Title</th>
     <th>Cost</th>
+    <th></th>
   </tr>
+  <% for (var i in activities) { %>
+    <tr>
+      <td><%= helper.moment(activities[i].createdAt).format('MMMM Do YYYY') %></td>
+      <td><%= activities[i].title %></td>
+      <td><%= activities[i].cost %></td>
+      <td><a href="/groups/destroy_activity/<%= activities[i].id %>">Destroy</a></td>
+    </tr>
+  <% } %>
 </table>
+
 
 <div class="modal" id="addActivityModal">
   <div class="modal-dialog">
@@ -31,19 +45,29 @@
         <h4 class="modal-title">Add Activity</h4>
       </div>
       <div class="modal-body">
-          <label for="user_name">Name</label>
-          <input id="user_name" type="text" name="name">
-          <br>
-          <label for="user_description">Description</label>
-          <textarea id="user_description" name="description"></textarea>
-          <br>
+
+        <p class="text-danger js-add-activity-modal-error" style="display:none">
+          Something went wrong
+        </p>
+
+        <label for="activity_title">Title</label>
+        <input id="activity_title" type="text" name="title" placeholder="House renting">
+        <br>
+
+        <label for="activity_cost">Cost $</label>
+        <input type="number" id="activity_cost" name="cost" placeholder="600">
+        <br>
+
+        <input id="activity_group_id" type="hidden" value="<%= group.id %>">
+
       </div>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal">Close</button>
-        <button class="btn">Add Activity</button>
+        <button class="btn js-add-activity">Add Activity</button>
       </div>
     </div> <!-- .modal-content -->
   </div> <!-- .modal-dialog -->
 </div>
+
 
 <% include ../footer %>

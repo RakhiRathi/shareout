@@ -76,7 +76,7 @@ router.post('/sign_up', function(req, res, next) {
     var alert_error = ""
 
     for (var i in error.errors){
-      alert_error += error.errors[i].message + "\n"
+      alert_error += error.errors[i].path + " : " + error.errors[i].message + "\n"
     }
 
     res.render('users/sign_up', {
