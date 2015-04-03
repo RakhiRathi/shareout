@@ -10,64 +10,9 @@
 
 <p><b>Created at: </b><%= helper.moment(group.createdAt).format('MMMM Do YYYY') %></p>
 
-<h2>Activities</h2>
+<% include activities %>
 
-<button class="btn" data-toggle="modal" data-target="#addActivityModal">
-  Add Activity
-</button>
-
-<br><br>
-
-Number of activities: <%= activities.length %>
-
-<table class="table">
-  <tr>
-    <th>Date</th>
-    <th>Title</th>
-    <th>Cost</th>
-    <th></th>
-  </tr>
-  <% for (var i in activities) { %>
-    <tr>
-      <td><%= helper.moment(activities[i].createdAt).format('MMMM Do YYYY') %></td>
-      <td><%= activities[i].title %></td>
-      <td><%= activities[i].cost %></td>
-      <td><a href="/groups/destroy_activity/<%= activities[i].id %>">Destroy</a></td>
-    </tr>
-  <% } %>
-</table>
-
-
-<div class="modal" id="addActivityModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Add Activity</h4>
-      </div>
-      <div class="modal-body">
-
-        <p class="text-danger js-add-activity-modal-error" style="display:none">
-          Something went wrong
-        </p>
-
-        <label for="activity_title">Title</label>
-        <input id="activity_title" type="text" name="title" placeholder="House renting">
-        <br>
-
-        <label for="activity_cost">Cost $</label>
-        <input type="number" id="activity_cost" name="cost" placeholder="600">
-        <br>
-
-        <input id="activity_group_id" type="hidden" value="<%= group.id %>">
-
-      </div>
-      <div class="modal-footer">
-        <button class="btn" data-dismiss="modal">Close</button>
-        <button class="btn js-add-activity">Add Activity</button>
-      </div>
-    </div> <!-- .modal-content -->
-  </div> <!-- .modal-dialog -->
-</div>
+<% include users %>
 
 
 <% include ../footer %>

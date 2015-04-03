@@ -88,5 +88,15 @@ router.post('/sign_up', function(req, res, next) {
 
 });
 
+/* GET search users. */
+router.get('/search', function(req, res, next) {
+  models.User
+    .findAll({ limit: 10, where: { $or: [{ email: { like: req.query.q+'%' }}, { name: { like: '%'+req.query.q+'%' }}]}})
+    .then(function(users_raw){
+      var users = users_raw.map(function(u){ return u.toSearchResult()})
+      res.send({ users: users })
+    })
+})
+
 
 module.exports = router;

@@ -22,6 +22,11 @@ module.exports = function(sequelize, DataTypes) {
         User.hasMany(models.Group)
         User.belongsToMany(models.Group, {through: 'UserShare'});
       }
+    },
+    instanceMethods: {
+      toSearchResult: function(){
+        return { id: this.id, name: this.name, email: this.email }
+      }
     }
   });
 

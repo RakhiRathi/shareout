@@ -1,6 +1,15 @@
 <% include ../header %>
 
-<h1>My owned Groups</h1>
+<h1>Dashboard</h1>
+
+<b>My Total Expenses:</b> $<%= totalExpenses %>
+
+<br>
+<br>
+
+<hr>
+
+<h2>Groups I'm in</h2>
 
 <p>Groups count: <%= groups.length %></p>
 
@@ -8,16 +17,20 @@
 
 <table class="table">
   <tr>
+    <th>Owner</th>
     <th>Date</th>
     <th>Name</th>
     <th>Description</th>
+    <th>Total Cost</th>
     <th></th>
   </tr>
   <% for (var i in groups) { %>
     <tr>
+      <td><%= groups[i].User.name %></td>
       <td><%= helper.moment(groups[i].createdAt).format('MMMM Do YYYY') %></td>
       <td><a href="/groups/show/<%= groups[i].id %>"><%= groups[i].name %></a></td>
       <td><%= groups[i].description %></td>
+      <td>$<%= groups[i].totalCost %></td>
       <td><a href="/groups/destroy/<%= groups[i].id %>" data-confirm="Sure?">Delete</a></td>
     </tr>
   <% } %>

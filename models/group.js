@@ -9,6 +9,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         Group.belongsTo(models.User)
         Group.hasMany(models.Activity)
+        Group.hasMany(models.UserShare)
         Group.belongsToMany(models.User, {through: 'UserShare'});
       }
     }

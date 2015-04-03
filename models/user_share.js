@@ -7,9 +7,14 @@ module.exports = function(sequelize, DataTypes) {
     comment: DataTypes.STRING
   }, {
     classMethods: {
-      // associate: function(models) {
-      //   UserShare.belongsTo(models.Group);
-      // }
+      associate: function(models) {
+        UserShare.belongsTo(models.User);
+      }
+    },
+    instanceMethods: {
+      getShare: function(genericShare){
+        return this.share || genericShare;
+      }
     }
   });
 

@@ -1,0 +1,47 @@
+.group-users-search-input {
+  width: 300px;
+  padding: 5px 9px;
+}
+
+.group-users-search-input:focus {
+  outline: none;
+}
+
+.group-users-search-results {
+  position: absolute;
+  width: 300px;
+  top: 10px;
+  left: 200px;
+  padding: 0;
+  margin: 0;
+}
+
+.group-users-search-results-content {
+  list-style: none;
+  border: 1px solid gray;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+}
+
+.group-users-search-results-content > li {
+  padding: 8px 10px;
+  color: 333;
+}
+
+.group-users-search-results-content > li > .email {
+  font-style: italic;
+  font-size: 80%;
+}
+
+.group-users-search-results-content > li:hover {
+  background-color: #DCF2F1;
+  color: #003;
+  cursor: pointer;
+}
+
+.group-users-search-results-content > .loading:hover {
+  background-color: #FFFFFF;
+  color: #000;
+  cursor: default;
+}
