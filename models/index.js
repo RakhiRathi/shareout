@@ -9,9 +9,14 @@ var env       = process.env.NODE_ENV || "development";
 var config    = require(__dirname + '/../config/config.json')[env];
 var sequelize = null;
 
+console.log('--> ENV ' + env)
+
 if (env == 'development'){
+  console.log('--> DEV ')
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 } else {
+  console.log('--> PRUD ')
+  console.log('--> URL ' + process.env.CLEARDB_DATABASE_URL)
   sequelize = new Sequelize(process.env.CLEARDB_DATABASE_URL);
 }
 
