@@ -13,8 +13,6 @@
 
 <p>Groups count: <%= groups.length %></p>
 
-<a href="/groups/new" class="btn btn-success">New Group</a>
-
 <table class="table">
   <tr>
     <th>Owner</th>
@@ -27,11 +25,11 @@
   <% for (var i in groups) { %>
     <tr>
       <td><%= groups[i].User.name %></td>
-      <td><%= helper.moment(groups[i].createdAt).format('MMMM Do YYYY') %></td>
+      <td><%= formatDateTime(groups[i].createdAt) %></td>
       <td><a href="/groups/show/<%= groups[i].id %>"><%= groups[i].name %></a></td>
       <td><%= groups[i].description %></td>
       <td>$<%= groups[i].totalCost %></td>
-      <td><a href="/groups/destroy/<%= groups[i].id %>" data-confirm="Sure?">Delete</a></td>
+      <td></td>
     </tr>
   <% } %>
 </table>

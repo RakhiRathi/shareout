@@ -20,7 +20,7 @@
   </tr>
   <% for (var i in activities) { %>
     <tr>
-      <td><%= helper.moment(activities[i].createdAt).format('MMMM Do YYYY HH:mm') %></td>
+      <td><%= formatDateTime(activities[i].createdAt) %></td>
       <td><%= activities[i].title %></td>
       <td>$<%= activities[i].cost %></td>
       <td><a href="/groups/destroy_activity/<%= activities[i].id %>">Destroy</a></td>

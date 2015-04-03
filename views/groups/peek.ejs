@@ -1,0 +1,60 @@
+<% include ../header %>
+
+<h1><%= group.name %></h1>
+
+<a href="/groups">Back</a>
+
+<hr>
+
+<p><i><%= group.description %></i></p>
+
+<p><b>Created at: </b><%= formatDate(group.createdAt) %></p>
+
+<h2>Activities</h2>
+
+<b>Number of activities:</b> <%= activities.length %><br>
+<b>Total Cost:</b> $<%= totalCost %>
+
+<br><br>
+
+<table class="table">
+  <tr>
+    <th>Added at</th>
+    <th>Title</th>
+    <th>Cost</th>
+    <th></th>
+  </tr>
+  <% for (var i in activities) { %>
+    <tr>
+      <td><%= formatDateTime(activities[i].createdAt) %></td>
+      <td><%= activities[i].title %></td>
+      <td>$<%= activities[i].cost %></td>
+      <td></td>
+    </tr>
+  <% } %>
+</table>
+
+
+<h2>Users</h2>
+
+Number of users: <%= user_shares.length %>
+
+<table class="table">
+  <tr>
+    <th>Added at</th>
+    <th>Name</th>
+    <th>Share</th>
+    <th></th>
+  </tr>
+  <% for ( var i in user_shares ) { %>
+    <tr>
+      <td><%= formatDateTime(user_shares[i].createdAt) %></td>
+      <td><%= user_shares[i].User.name %></td>
+      <td>$<%= user_shares[i].getShare(genericShare) %></td>
+      <td></td>
+    </tr>
+  <% } %>
+</table>
+
+
+<% include ../footer %>

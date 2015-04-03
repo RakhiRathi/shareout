@@ -13,10 +13,11 @@
     <div class="container">
       <nav class="main-menu">
         <ul class="nav pull-left">
-          <li class="active"><a href="/">Home</a></li>
           <% if (current_user) { %>
             <li class=""><a href="/groups/dashboard">Dashboard</a></li>
             <li class=""><a href="/groups">My Groups</a></li>
+          <% } else { %>
+            <li class="active"><a href="/">Home</a></li>
           <% } %>
         </ul>
           <% if (current_user) { %>

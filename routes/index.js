@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'ShareOut' });
+  if (req.current_user) {
+    res.redirect('/groups/dashboard')
+  } else {
+    res.render('index', { title: 'ShareOut' });
+  }
 });
 
 module.exports = router;

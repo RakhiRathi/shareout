@@ -71,22 +71,28 @@ router.get('/show/:id', function(req, res, next) {
     for (var i in activities)
       totalCost += activities[i].cost
 
-    req.resource.getUserShares({ order: 'createdAt desc', include: [ models.User ] }).then(function(user_shares){
+    req.resource.getUserShares({ order: 'createdAt desc', include: [ models.User ] })
+      .then(function(user_shares){
+        var genericShare = 0
 
-      var genericShare = 0
+        if (user_shares.length > 0)
+          genericShare = Math.ceil(totalCost / user_shares.length)
 
-      if (user_shares.length > 0)
-        genericShare = Math.ceil(totalCost / user_shares.length)
+        var view = 'groups/peek'
 
-      res.render('groups/show', {
-        title: 'Group - ShareOut',
-        group: req.resource,
-        activities: activities,
-        user_shares: user_shares,
-        genericShare: genericShare,
-        totalCost: totalCost
+        if (req.resource.UserId == req.current_user.id)
+          view = 'groups/show'
+
+        res.render(view, {
+          title: 'Group - ShareOut',
+          group: req.resource,
+          activities: activities,
+          user_shares: user_shares,
+          genericShare: genericShare,
+          totalCost: totalCost
+        })
       })
-    })
+
   })
 });
 
