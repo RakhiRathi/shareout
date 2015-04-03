@@ -5,8 +5,16 @@ var path      = require("path");
 var Sequelize = require("sequelize");
 var basename  = path.basename(module.filename);
 var env       = process.env.NODE_ENV || "development";
+
 var config    = require(__dirname + '/../config/config.json')[env];
-var sequelize = new Sequelize(config.database, config.username, config.password, config);
+var sequelize = null;
+
+if (env == 'development'){
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
+} else {
+  sequelize = new Sequelize(process.env.CLEARDB_DATABASE_URL);
+}
+
 var db        = {};
 
 fs

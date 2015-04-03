@@ -19,9 +19,6 @@ var app = express();
 var session = require('express-session')
 var FileStore = require('session-file-store')(session);
 
-// load .env
-require('dotenv').load();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
