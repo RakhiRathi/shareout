@@ -20,7 +20,7 @@ router.use(function(req, res, next) {
 })
 
 // middleware that loads Group by :id
-router.all('/:action(show|destroy|add_activity|add_user)?/:id', function(req, res, next) {
+router.all('/:action(show|destroy|add_activity|add_user|finish)?/:id', function(req, res, next) {
   models.Group
     .find({ where: { id: req.params.id } })
     .then(function(group) {
@@ -31,7 +31,7 @@ router.all('/:action(show|destroy|add_activity|add_user)?/:id', function(req, re
 
 /* GET list of groups. */
 router.get('/dashboard', function(req, res, next) {
-  req.current_user.getGroups({ include: [ models.User, models.Activity ]})
+  req.current_user.getGroups({ include: [ models.User, models.UserShare, models.Activity ]})
     .then(function(groups){
       var totalExpenses = 0
 
@@ -41,7 +41,10 @@ router.get('/dashboard', function(req, res, next) {
           var us = groups[i].Activities[us_i]
           groups[i].totalCost += us.cost
         }
-        totalExpenses += groups[i].totalCost
+        groups[i].userCost = 0
+        if (groups[i].UserShares.length > 0)
+          groups[i].userCost = Math.ceil(groups[i].totalCost / groups[i].UserShares.length)
+        totalExpenses += groups[i].userCost
       }
 
       res.render('groups/dashboard', {
@@ -189,5 +192,15 @@ router.post('/add_user/:id', function(req, res, next) {
 
 });
 
+
+/* GET finish the group. */
+router.get('/finish/:id', function(req, res, next) {
+  req.resource.finishedAt = new Date()
+  req.resource.save()
+    .then(function(){
+      req.session.alert_success = "Group is finished."
+      res.redirect('/groups/show/' + req.resource.id)
+    })
+})
 
 module.exports = router;

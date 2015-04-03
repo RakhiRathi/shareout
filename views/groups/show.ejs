@@ -4,15 +4,21 @@
 
 <a href="/groups">Back</a>
 
+<% if (group.isActive()) { %>
+  <a class="text-danger" data-confirm="Are you sure?" href="/groups/finish/<%= group.id %>">Finish</a>
+<% } %>
+
 <hr>
 
 <p><i><%= group.description %></i></p>
 
-<p><b>Created at: </b><%= formatDateTime(group.createdAt) %></p>
+<p><b>Created at:</b> <%= formatDateTime(group.createdAt) %></p>
 
-<% include activities %>
+<p><b>Status:</b> <%= group.getStatus() %></p>
 
-<% include users %>
+<% include show/activities %>
+
+<% include show/users %>
 
 
 <% include ../footer %>

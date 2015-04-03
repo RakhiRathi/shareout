@@ -19,7 +19,10 @@
     <th>Date</th>
     <th>Name</th>
     <th>Description</th>
+    <th>Status</th>
+    <th>Mine</th>
     <th>Total Cost</th>
+    <th>Users</th>
     <th></th>
   </tr>
   <% for (var i in groups) { %>
@@ -28,7 +31,10 @@
       <td><%= formatDateTime(groups[i].createdAt) %></td>
       <td><a href="/groups/show/<%= groups[i].id %>"><%= groups[i].name %></a></td>
       <td><%= groups[i].description %></td>
+      <td><%= groups[i].getStatus() %></td>
+      <td>$<%= groups[i].userCost %></td>
       <td>$<%= groups[i].totalCost %></td>
+      <td><%= groups[i].UserShares.length %></td>
       <td></td>
     </tr>
   <% } %>

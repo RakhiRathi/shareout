@@ -1,0 +1,39 @@
+<h2>Users</h2>
+
+<% if (group.isActive()) { %>
+  <input type="search" class="group-users-search-input js-group-users-search-input" placeholder="name or email address" data-group-id=<%= group.id %>>
+  <button class="js-group-users-add">Add User</button>
+
+  <div class="group-users-search-results">
+    <ul class="group-users-search-results-content">
+      <li>Zhomart mukhamejanov</li>
+      <li>Jessica Alba</li>
+    </ul>
+  </div>
+
+  <br><br>
+
+<% } %>
+
+Number of users: <%= user_shares.length %>
+
+<table class="table">
+  <tr>
+    <th>Added at</th>
+    <th>Name</th>
+    <th>Share</th>
+    <th></th>
+  </tr>
+  <% for ( var i in user_shares ) { %>
+    <tr>
+      <td><%= formatDateTime(user_shares[i].createdAt) %></td>
+      <td><%= user_shares[i].User.name %></td>
+      <td>$<%= user_shares[i].getShare(genericShare) %></td>
+      <td>
+        <% if (group.isActive()) { %>
+          <a href="#" data-confirm="Are you sure?">Delete</a>
+        <% } %>
+      </td>
+    </tr>
+  <% } %>
+</table>
