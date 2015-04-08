@@ -1,4 +1,24 @@
 <h2>Activities</h2>
+<style type="text/css">
+ html, body {
+                margin: 0;
+                padding: 0
+            }
+            #contentWrapper {
+                width: 300px;
+                margin: 0 auto;
+                background: #ccc;
+                height: 100px
+            }
+            #headerBar {
+                height: 40px;
+                background: orange
+            }
+            #footerBar {
+                height: 40px;
+                background: red
+            }
+        </style>
 
 <% if (group.isActive()) { %>
   <button class="btn" data-toggle="modal" data-target="#addActivityModal">
@@ -34,10 +54,12 @@
 </table>
 
 <div class="modal" id="addActivityModal">
+
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Add Activity</h4>
+
+      <h3 class="modal-title" color = "white">Add Activity</h3>
       </div>
       <div class="modal-body">
 
@@ -45,12 +67,12 @@
           Something went wrong
         </p>
 
-        <label for="activity_title">Title</label>
-        <input id="activity_title" type="text" name="title" placeholder="House renting">
+        <label for="activity_title"><strong>Title</strong></label>
+        <input id="activity_title" type="text" name="title" placeholder="e.g. House renting">
         <br>
 
-        <label for="activity_cost">Cost $</label>
-        <input type="number" id="activity_cost" name="cost" placeholder="600">
+        <label for="activity_cost"><strong>Cost $</strong></label>
+        <input type="number" id="activity_cost" name="cost" placeholder="0">
         <br>
 
         <input id="activity_group_id" type="hidden" value="<%= group.id %>">

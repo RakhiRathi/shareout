@@ -1,15 +1,92 @@
-<% include ../header %>
 
-<h1>Sign in</h1>
 
-<form action="/users/sign_in" method="POST">
-  <label for="user_email">Email</label>
-  <input id="user_email" type="email" name="email" value="<%= email %>">
-  <br>
-  <label for="user_password">Password</label>
-  <input id="user_password" type="password" name="password">
-  <br>
-  <button>Sign In</button>
-</form>
+<!DOCTYPE html>
 
-<% include ../footer %>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=400, user-scalable=yes" />
+        <meta name="description" content="ShareOut is a free website for sharing expenses,tracking bills among friends and rommies.Its available on iphone,android and web!">
+        <title>Sign in-ShareOut</title>
+        <meta content="authenticity_token" name="csrf-param" />
+        <meta content="LmOA1dHLqSt+mOH9XsTMPA2XtsmoAC4mZkBRgOL6lxY=" name="csrf-token" />
+        <link href="/css/share_out.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="/favicon.ico" rel="shortcut icon">
+        <style type="text/css">
+            input#shiny {
+                padding: 4px 20px;
+                /*give the background a gradient*/
+                background:#ffae00; /*fallback for browsers that don't support gradients*/
+                background: -webkit-linear-gradient(top, #ffae00, #d67600);
+                background: -moz-linear-gradient(top, #ffae00, #d67600);
+                background: -o-linear-gradient(top, #ffae00, #d67600);
+                background: linear-gradient(top, #ffae00, #d67600);
+                border:2px outset #dad9d8;
+                /*style the text*/
+                font-family:Andika, Arial, sans-serif; /*Andkia is available at http://www.google.com/webfonts/specimen/Andika*/
+                font-size:1.1em;
+                letter-spacing:0.05em;
+
+                color:#fff;
+                text-shadow: 0px 1px 10px #000;
+                /*add to small curve to the corners of the button*/
+                -webkit-border-radius: 15px;
+                -moz-border-radius: 15px;
+                border-radius: 15px;
+                /*give the button a drop shadow*/
+                -webkit-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+                -moz-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+                box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+            }
+            /****NOW STYLE THE BUTTON'S HOVER STATE***/
+            input#shiny:hover, input#shiny:focus {
+                border:1px solid #dad9d8;
+            }
+
+            html, body {
+                margin: 0;
+                padding: 0
+            }
+           
+        </style>
+    </head>
+    <body id="fat_rabbit">
+        <div class="headerBar"></div>
+        <div class="wrapper">
+            <div class="toppad">&nbsp;</div>
+            <div class="flex_container blank_page clearfix">
+                <a href="/"><img alt="Logo" class="envelope" height="200" src="/images/logo_1546739_web.jpg" width="200" /></a>
+                <div class="content-block">
+                    <form accept-charset="UTF-8" action="/users/sign_in" class="form-stacked" id="new_user" method="post"> 
+                        <div>
+                            <strong> Email:</strong>
+                            <br>
+                            <input id="user_email" name="email" size="20" tabindex="1" type="email"  value="<%= email %>"/>
+                        </div>
+                        <div>
+                            <strong>Password:</strong>
+                            <br>
+                            <input id="user_password" name="password" size="20" tabindex="2" type="password" />
+                        </div>
+                        <div style="position: relative; margin-top: -3px">
+                            <input autocomplete="off" id="shiny" type="submit" value="Sign in!" />
+                        </div>
+                    </form> 
+                </div>
+            </div>
+        </div>
+
+        <script src="//dx0qysuen8cbs.cloudfront.net/assets/adorable-9e266ac404d94fae482d7c6d18c67b96.js" type="text/javascript"></script>
+        <script>$('#user_name').focus()</script>
+        <script>
+            // Track existing user logins on Mixpanel
+            if ($.cookies.test()) {
+                $.cookies.set("notLoggedIn", true);
+            }
+        </script>
+         <div class="footerBar"></div>
+    </body>
+
+</html>
+
+
